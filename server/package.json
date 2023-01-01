@@ -1,0 +1,14 @@
+{
+  "name": "nms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Mahmoud Kassem",
+  "license": "ISC",
+  "dependencies": {
+    "node-media-server": "^2.4.9"
+  }
+}

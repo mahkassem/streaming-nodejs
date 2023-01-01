@@ -1,0 +1,16 @@
+{
+    "apps": [
+        {
+            "name": "flv-client",
+            "script": "npm",
+            "args": [
+                "start"
+            ],
+            "interpreter": "node",
+            "watch": false,
+            "error_file": "log/err.log",
+            "out_file": "log/out.log",
+            "log_file": "log/combined.log"
+        }
+    ]
+}

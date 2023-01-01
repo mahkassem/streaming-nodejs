@@ -1,0 +1,14 @@
+{
+  "name": "rtmp-client",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite --port 6060",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "author": "Mahmoud Kassem",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.0.3"
+  }
+}

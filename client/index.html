@@ -1,0 +1,123 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+    }
+
+    #videoElement {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #000;
+    }
+
+    #playButton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #000;
+        border: 2px solid #fff;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.25;
+    }
+
+    #playButton:hover {
+        opacity: 1;
+    }
+
+    #pauseButton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #000;
+        border: 2px solid #fff;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.25;
+    }
+
+    #pauseButton:hover {
+        opacity: 1;
+    }
+
+    #stream_code {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        outline: none;
+    }
+</style>
+<script src="flv.min.js"></script>
+<video id="videoElement" width="90%" height="90%"></video>
+<input type="text" id="stream_code" placeholder="Enter stream code">
+<button id="playButton">Play</button>
+<button id="pauseButton" style="display: none;">Pause</button>
+<script>
+    var isPlaying = false;
+    function playIfSupported() {
+        var streamCode = document.getElementById('stream_code').value;
+        if (streamCode == '') {
+            alert('Please enter stream code');
+            return;
+        }
+        if (flvjs.isSupported()) {
+            var videoElement = document.getElementById('videoElement');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: `http://localhost:8000/live/${streamCode}.flv`
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+
+            playButton.style.display = 'none';
+            pauseButton.style.display = 'block';
+            isPlaying = true;
+        } else {
+            alert('Your browser does not support FLV.js');
+        }
+    }
+
+    var playButton = document.getElementById('playButton');
+    playButton.addEventListener('click', function () {
+        playIfSupported();
+    });
+
+    var pauseButton = document.getElementById('pauseButton');
+    pauseButton.addEventListener('click', function () {
+        if (isPlaying) {
+            videoElement.pause();
+            playButton.style.display = 'block';
+            pauseButton.style.display = 'none';
+            isPlaying = false;
+        } else {
+            videoElement.play();
+            playButton.style.display = 'none';
+            pauseButton.style.display = 'block';
+            isPlaying = true;
+        }
+    });
+</script>
